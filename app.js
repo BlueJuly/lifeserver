@@ -18,8 +18,7 @@ function socketIdsInRoom(name) {
   io.of('/').in(name).clients((error, clients) => {
     if (error) throw error;
     var socketIds = clients;
-    console.log("---return socket ids are---");
-    console.log(socketIds);
+    
     return socketIds;
     // if (socketIds) {
     //   var collection = [];
@@ -54,7 +53,13 @@ io.on("connection", (socket) => {
     console.log('join', name);
     var socketIds = socketIdsInRoom(name);
     callback(socketIds);
-    socket.emit('joinResponse', socketIds);
+    io.of('/').in(name).clients((error, clients) => {
+      if (error) throw error;
+      console.log("---return socket ids are---");
+      console.log(clients);
+      socket.emit('joinResponse', clients);
+    })
+    
     socket.join(name);
     socket.room = name;
   });
