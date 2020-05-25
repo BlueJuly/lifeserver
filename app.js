@@ -17,9 +17,9 @@ function socketIdsInRoom(name) {
   console.log(io.sockets.adapter.rooms[name]);
   io.of('/').in(name).clients((error, clients) => {
     if (error) throw error;
+    var socketIds = clients;
     console.log("---return socket ids are---");
     console.log(socketIds);
-    var socketIds = clients;
     return socketIds;
     // if (socketIds) {
     //   var collection = [];
