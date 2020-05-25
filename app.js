@@ -26,14 +26,14 @@ function socketIdsInRoom(name) {
   }
 io.on("connection", (socket) => {
   console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
+  // if (interval) {
+  //   clearInterval(interval);
+  // }
+  // interval = setInterval(() => getApiAndEmit(socket), 1000);
   
   socket.on('disconnect', function(){
     console.log('disconnect');
-    clearInterval(interval);
+    //clearInterval(interval);
     if (socket.room) {
       var room = socket.room;
       io.to(room).emit('leave', socket.id);
