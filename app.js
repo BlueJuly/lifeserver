@@ -18,15 +18,16 @@ function socketIdsInRoom(name) {
   io.of('/').in(name).clients((error, clients) => {
     if (error) throw error;
     var socketIds = clients;
-    if (socketIds) {
-      var collection = [];
-      for (var key in socketIds) {
-        collection.push(key);
-      }
-      return collection;
-    } else {
-      return [];
-    }
+    return socketIds;
+    // if (socketIds) {
+    //   var collection = [];
+    //   for (var key in socketIds) {
+    //     collection.push(key);
+    //   }
+    //   return collection;
+    // } else {
+    //   return [];
+    // }
   });
     
   }
