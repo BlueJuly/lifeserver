@@ -13,7 +13,11 @@ const server = http.createServer(app);
 const io = socketIo(server);
 let interval;
 function socketIdsInRoom(name) {
-    var socketIds = io.nsps['/'].adapter.rooms[name];
+  console.log("------");
+  console.log(io.sockets.adapter.rooms[name]);
+  io.of('/').in(name).clients((error, clients) => {
+    if (error) throw error;
+    var socketIds = clients;
     if (socketIds) {
       var collection = [];
       for (var key in socketIds) {
@@ -23,6 +27,8 @@ function socketIdsInRoom(name) {
     } else {
       return [];
     }
+  });
+    
   }
 io.on("connection", (socket) => {
   console.log("New client connected");
