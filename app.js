@@ -54,6 +54,7 @@ io.on("connection", (socket) => {
     console.log('join', name);
     var socketIds = socketIdsInRoom(name);
     callback(socketIds);
+    socket.emit('joinResponse', socketIds);
     socket.join(name);
     socket.room = name;
   });
