@@ -55,9 +55,9 @@ io.on("connection", (socket) => {
     }
   }
   console.log('------android Device Object---------');
-  console/log(androidDevice);
+  console.log(androidDevice);
   console.log('------iOS Device Object---------');
-  console/log(iOSDevice);
+  console.log(iOSDevice);
   // if (interval) {
   //   clearInterval(interval);
   // }
