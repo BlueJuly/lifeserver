@@ -12,6 +12,16 @@ const server = http.createServer(app);
 
 const io = socketIo(server);
 let interval;
+let androidDevice;
+let iOSDevice;
+androidDevice = {
+  deviceToken:undefined,
+  socket:undefined
+};
+iOSDevice = {
+  deviceToken:undefined,
+  socket:undefined
+};
 function socketIdsInRoom(name) {
   console.log("------");
   console.log(io.sockets.adapter.rooms[name]);
@@ -34,6 +44,20 @@ function socketIdsInRoom(name) {
   }
 io.on("connection", (socket) => {
   console.log("New client connected");
+  if (socket.handshake.query.device){
+    if(socket.handshake.query.device==='android'){
+      socket.deviceType = 'android';
+      androidDevice.socket = socket;
+    }
+    if(socket.handshake.query.device==='iOS'){
+      iOSDevice.socket = socket;
+      socket.deviceType = 'iOS';
+    }
+  }
+  console.log('------android Device Object---------');
+  console/log(androidDevice);
+  console.log('------iOS Device Object---------');
+  console/log(iOSDevice);
   // if (interval) {
   //   clearInterval(interval);
   // }
@@ -63,10 +87,20 @@ io.on("connection", (socket) => {
     socket.join(name);
     socket.room = name;
   });
+  socket.on('prepareCall', function(){
+    if (socket.deviceType === 'android') {
+      console.log('------try to call iOS---------');
+      socket.emit('startCall', iOSDevice.socket)
+    }
+    if (socket.deviceType === 'iOS') {
+      console.log('------try to call android---------');
+      socket.emit('startCall', androidDevice.socket)
+    }
+  });
 
 
   socket.on('exchange', function(data){
-    console.log('exchange', data);
+    //console.log('exchange', data);
     data.from = socket.id;
     var to = io.sockets.connected[data.to];
     to.emit('exchange', data);
