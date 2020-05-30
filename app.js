@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
     callback(socketIds);
     io.of('/').in(name).clients((error, clients) => {
       if (error) throw error;
-      console.log("---return socket ids are---");
+      //console.log("---return socket ids are---");
       console.log(clients);
       socket.emit('joinResponse', clients);
     })
