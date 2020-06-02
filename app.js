@@ -98,8 +98,8 @@ io.on("connection", (socket) => {
     }
     if (socket.deviceType === 'iOS') {
       console.log('------try to call android---------');
-      console.log('------android socket.id---------');
-      console.log(androidDevice.socket.id);
+      console.log('------android device---------');
+      console.log(androidDevice);
       socket.emit('startCall', androidDevice.socket);
     }
   });
