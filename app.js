@@ -94,7 +94,7 @@ io.on("connection", (socket) => {
       console.log('------try to call iOS---------');
       console.log('------iOS socket.id---------');
       console.log(iOSDevice.socket.id);
-      if (iOSDevice.socket.id) {
+      if (iOSDevice.socket) {
         socket.emit('startCall', iOSDevice.socket.id);
       }
     }
@@ -102,7 +102,7 @@ io.on("connection", (socket) => {
       console.log('------try to call android---------');
       console.log('------android device---------');
       console.log(androidDevice);
-      if(androidDevice.socket.id){
+      if(androidDevice.socket){
         socket.emit('startCall', androidDevice.socket.id);
       }
     }
