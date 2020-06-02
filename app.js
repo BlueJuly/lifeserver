@@ -48,16 +48,18 @@ io.on("connection", (socket) => {
     if(socket.handshake.query.device==='android'){
       socket.deviceType = 'android';
       androidDevice.socket = socket;
+      console.log('------android socket.id---------');
+      console.log(androidDevice.socket.id);
     }
     if(socket.handshake.query.device==='iOS'){
       iOSDevice.socket = socket;
       socket.deviceType = 'iOS';
+      console.log('------iOS socket.id---------');
+      console.log(iOSDevice.socket.id);
     }
   }
-  console.log('------android Device Object---------');
-  console.log(androidDevice);
-  console.log('------iOS Device Object---------');
-  console.log(iOSDevice);
+  
+  
   // if (interval) {
   //   clearInterval(interval);
   // }
@@ -90,11 +92,15 @@ io.on("connection", (socket) => {
   socket.on('prepareCall', function(){
     if (socket.deviceType === 'android') {
       console.log('------try to call iOS---------');
-      socket.emit('startCall', iOSDevice.socket)
+      socket.emit('startCall', iOSDevice.socket);
+      console.log('------iOS socket.id---------');
+      console.log(iOSDevice.socket.id);
     }
     if (socket.deviceType === 'iOS') {
       console.log('------try to call android---------');
-      socket.emit('startCall', androidDevice.socket)
+      console.log('------android socket.id---------');
+      console.log(androidDevice.socket.id);
+      socket.emit('startCall', androidDevice.socket);
     }
   });
 
