@@ -92,15 +92,19 @@ io.on("connection", (socket) => {
   socket.on('prepareCall', function(){
     if (socket.deviceType === 'android') {
       console.log('------try to call iOS---------');
-      socket.emit('startCall', iOSDevice.socket.id);
       console.log('------iOS socket.id---------');
       console.log(iOSDevice.socket.id);
+      if (iOSDevice.socket.id)) {
+        socket.emit('startCall', iOSDevice.socket.id);
+      }
     }
     if (socket.deviceType === 'iOS') {
       console.log('------try to call android---------');
       console.log('------android device---------');
       console.log(androidDevice);
-      socket.emit('startCall', androidDevice.socket.id);
+      if(androidDevice.socket.id){
+        socket.emit('startCall', androidDevice.socket.id);
+      }
     }
   });
 
