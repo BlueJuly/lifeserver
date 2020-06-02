@@ -94,7 +94,7 @@ io.on("connection", (socket) => {
       console.log('------try to call iOS---------');
       console.log('------iOS socket.id---------');
       console.log(iOSDevice.socket.id);
-      if (iOSDevice.socket.id)) {
+      if (iOSDevice.socket.id) {
         socket.emit('startCall', iOSDevice.socket.id);
       }
     }
